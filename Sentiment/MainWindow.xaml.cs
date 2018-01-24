@@ -28,8 +28,6 @@ namespace Sentiment
             InitializeComponent();
             _mainViewModel = new MainViewModel();
             this.DataContext = _mainViewModel;
-            //test gitt
-
         }
     }
 }

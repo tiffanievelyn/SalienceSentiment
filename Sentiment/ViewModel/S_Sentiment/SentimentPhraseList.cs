@@ -10,10 +10,7 @@ namespace Sentiment.ViewModel
 {
     public class SentimentPhraseList : ObservableCollection<S_Phrase>
     {
-        public SentimentPhraseList() : base()
-        {
-            
-        }
+        public SentimentPhraseList() : base() {}
     }
 
     public class S_Phrase
@@ -21,15 +18,6 @@ namespace Sentiment.ViewModel
         public float sp_score { get; set; }
         public string sp_phrase { get; set; }
         
-
-
     }
-
-    public class Phrase : SaliencePhrase
-    {
-        public string getText()
-        {
-            return this.sText;
-        }
-    }
+    
 }

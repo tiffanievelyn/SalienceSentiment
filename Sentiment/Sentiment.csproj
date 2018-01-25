@@ -75,7 +75,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModel\SentimentPhraseList.cs" />
+    <Compile Include="ViewModel\S_Sentiment\SentimentEmotionList.cs" />
+    <Compile Include="ViewModel\S_Sentiment\SentimentModelSentimentList.cs" />
+    <Compile Include="ViewModel\S_Sentiment\SentimentPhraseList.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -96,7 +98,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewModel\NameList.cs" />
     <Compile Include="ViewModel\ObservableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

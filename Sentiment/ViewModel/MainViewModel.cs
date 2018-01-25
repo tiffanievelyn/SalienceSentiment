@@ -14,13 +14,10 @@ namespace ViewModel
         private string _inputText = "This is happy all about getting on with it, delivering the things that we said we would do, I'm very pleased to say ";
 
         #region Attribute
-        private ObservableCollection<S_Phrase> _phraseList = new ObservableCollection<S_Phrase>();
-
         private float _documentSentiment;
-        private float _score;
-        private string _phrasesView;
-        private string _modelSentiment;
-        private string _emotions;
+        private ObservableCollection<S_Phrase> _phraseList = new ObservableCollection<S_Phrase>();
+        private ObservableCollection<S_ModelSentiment> _modelSentimentList = new ObservableCollection<S_ModelSentiment>();
+        private ObservableCollection<S_Emotion> _emotiontList = new ObservableCollection<S_Emotion>();
 
         public float DocumentSentiment
         {
@@ -32,7 +29,7 @@ namespace ViewModel
             }
         }
 
-        public ObservableCollection<Sentiment.ViewModel.S_Phrase> PhraseList
+        public ObservableCollection<S_Phrase> PhraseList
         {
             get
             {
@@ -40,24 +37,14 @@ namespace ViewModel
             }
         }
 
-        public string PhraseView
+        public ObservableCollection<S_ModelSentiment> ModelSentimentList
         {
-            get { return _phrasesView; }
-            set
-            {
-                _phrasesView = value;
-                RaisePropertyChangedEvent(nameof(PhraseView));
-            }
+            get { return _modelSentimentList; }
         }
 
-        public float Score
+        public ObservableCollection<S_Emotion> EmotionList
         {
-            get { return _score; }
-            set
-            {
-                _score = value;
-                RaisePropertyChangedEvent(nameof(Score));
-            }
+            get { return _emotiontList; }
         }
 
         public string LicensePath
@@ -107,8 +94,6 @@ namespace ViewModel
         #endregion
         
         Salience Engine = null;
-        private float score; //LOOK
-        private string phrase;
 
         public MainViewModel()
         {
@@ -128,10 +113,16 @@ namespace ViewModel
                 return;
             }
         }
+        private void resetList()
+        {
+            EmotionList.Clear(); PhraseList.Clear(); ModelSentimentList.Clear();
+        }
         
         private void Reset()
         {
-            LicensePath = DataPath = TextInput = string.Empty;
+            //LicensePath = DataPath = 
+            TextInput = string.Empty;
+            resetList();
         }
 
         private void Update()
@@ -143,12 +134,39 @@ namespace ViewModel
                 if (nRet == 0)
                 {
                     SalienceSentiment mySentiment = Engine.GetDocumentSentiment(true, String.Empty);
+                    resetList();
                     DocumentSentiment = mySentiment.fScore;
                     foreach (var a in mySentiment.Phrases.ToArray())
                     {
-                        S_Phrase p = new S_Phrase { sp_score = a.fScore, sp_phrase = a.Phrase.sText };
+                        S_Phrase p = new S_Phrase {
+                            sp_score = a.fScore,
+                            sp_phrase = a.Phrase.sText
+                        };
                         PhraseList.Add(p);
-                        RaisePropertyChangedEvent(nameof(PhraseList));
+                    }
+                    foreach (var b in mySentiment.ModelSentiment.ToArray())
+                    {
+                        S_ModelSentiment m = new S_ModelSentiment
+                        {
+                            ms_name = b.sName,
+                            ms_best = b.nBest,
+                            ms_positive = b.fPositive,
+                            ms_mixed = b.fMixed,
+                            ms_negative = b.fNegative,
+                            ms_neutral = b.fNeutral
+                        };
+                        ModelSentimentList.Add(m);
+                    }
+                    foreach (var c in mySentiment.Emotions.ToArray())
+                    {
+                        S_Emotion e = new S_Emotion
+                        {
+                            e_topic = c.sTopic,
+                            e_hit = c.nHits,
+                            e_score = c.fScore,
+                            s_summary = c.sSummary
+                        };
+                        EmotionList.Add(e);
                     }
                     
                 }

@@ -4,7 +4,6 @@ C:\Users\tlim\source\repos\Sentiment\Sentiment\bin\x64\Debug\Sentiment.pdb
 C:\Users\tlim\source\repos\Sentiment\Sentiment\bin\x64\Debug\Salience6.NET.dll
 C:\Users\tlim\source\repos\Sentiment\Sentiment\obj\x64\Debug\MainWindow.g.cs
 C:\Users\tlim\source\repos\Sentiment\Sentiment\obj\x64\Debug\App.g.cs
-C:\Users\tlim\source\repos\Sentiment\Sentiment\obj\x64\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\tlim\source\repos\Sentiment\Sentiment\obj\x64\Debug\Sentiment_MarkupCompile.cache
 C:\Users\tlim\source\repos\Sentiment\Sentiment\obj\x64\Debug\Sentiment_MarkupCompile.lref
 C:\Users\tlim\source\repos\Sentiment\Sentiment\obj\x64\Debug\App.baml

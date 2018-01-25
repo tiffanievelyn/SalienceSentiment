@@ -4,8 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sentiment"
+        xmlns:c="clr-namespace:Sentiment.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="550">
+
+    <Window.Resources>
+        <c:NameList x:Key="NameListData"/>
+    </Window.Resources>
+    
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -71,8 +77,10 @@
         </StackPanel>
 
         <StackPanel Grid.Row="3" Margin="0 10" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <Button Margin="3" Padding="10" Content="{StaticResource _update}" />
+            <Button Command="{Binding UpdateCommand}" Margin="3" Padding="10" Content="{StaticResource _update}" />
             <Button Command="{Binding ResetCommand}"  Margin="3" Padding="10" Content="{StaticResource _reset}" />
         </StackPanel>
+
+
     </Grid>
 </Window>

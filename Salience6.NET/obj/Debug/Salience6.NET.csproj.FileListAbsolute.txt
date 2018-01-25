@@ -1,0 +1,6 @@
+C:\Program Files (x86)\Lexalytics\Salience\SDK\dotNET\src\bin\debug\Salience6.NET.dll
+C:\Program Files (x86)\Lexalytics\Salience\SDK\dotNET\src\bin\debug\Salience6.NET.pdb
+C:\Program Files (x86)\Lexalytics\Salience\SDK\dotNET\src\obj\Debug\Salience6.NET.csprojResolveAssemblyReference.cache
+C:\Program Files (x86)\Lexalytics\Salience\SDK\dotNET\src\obj\Debug\Salience6.NET.csproj.CoreCompileInputs.cache
+C:\Program Files (x86)\Lexalytics\Salience\SDK\dotNET\src\obj\Debug\Salience6.NET.dll
+C:\Program Files (x86)\Lexalytics\Salience\SDK\dotNET\src\obj\Debug\Salience6.NET.pdb

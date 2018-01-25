@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sentiment", "Sentiment\Sentiment.csproj", "{AA5A0975-7B1B-4173-A2C0-04450DE9963D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salience6.NET", "..\..\..\..\..\Program Files (x86)\Lexalytics\Salience\SDK\dotNET\src\Salience6.NET.csproj", "{8E0903BE-5922-4EFB-8518-C0054C9D2798}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salience6.NET", "Salience6.NET\Salience6.NET.csproj", "{8E0903BE-5922-4EFB-8518-C0054C9D2798}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,14 +22,14 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AA5A0975-7B1B-4173-A2C0-04450DE9963D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AA5A0975-7B1B-4173-A2C0-04450DE9963D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA5A0975-7B1B-4173-A2C0-04450DE9963D}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{AA5A0975-7B1B-4173-A2C0-04450DE9963D}.Debug|x64.Build.0 = Debug|Any CPU
+		{AA5A0975-7B1B-4173-A2C0-04450DE9963D}.Debug|x64.ActiveCfg = Debug|x64
+		{AA5A0975-7B1B-4173-A2C0-04450DE9963D}.Debug|x64.Build.0 = Debug|x64
 		{AA5A0975-7B1B-4173-A2C0-04450DE9963D}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{AA5A0975-7B1B-4173-A2C0-04450DE9963D}.Debug|x86.Build.0 = Debug|Any CPU
 		{AA5A0975-7B1B-4173-A2C0-04450DE9963D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA5A0975-7B1B-4173-A2C0-04450DE9963D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AA5A0975-7B1B-4173-A2C0-04450DE9963D}.Release|x64.ActiveCfg = Release|Any CPU
-		{AA5A0975-7B1B-4173-A2C0-04450DE9963D}.Release|x64.Build.0 = Release|Any CPU
+		{AA5A0975-7B1B-4173-A2C0-04450DE9963D}.Release|x64.ActiveCfg = Release|x64
+		{AA5A0975-7B1B-4173-A2C0-04450DE9963D}.Release|x64.Build.0 = Release|x64
 		{AA5A0975-7B1B-4173-A2C0-04450DE9963D}.Release|x86.ActiveCfg = Release|Any CPU
 		{AA5A0975-7B1B-4173-A2C0-04450DE9963D}.Release|x86.Build.0 = Release|Any CPU
 		{AA5A0975-7B1B-4173-A2C0-04450DE9963D}.Timed|Any CPU.ActiveCfg = Release|Any CPU

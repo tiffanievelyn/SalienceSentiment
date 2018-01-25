@@ -16,4 +16,4 @@ C:\Users\tlim\source\repos\Sentiment\Sentiment\obj\Debug\Sentiment.exe
 C:\Users\tlim\source\repos\Sentiment\Sentiment\obj\Debug\Sentiment.pdb
 C:\Users\tlim\source\repos\Sentiment\Sentiment\obj\Debug\Sentiment.csprojResolveAssemblyReference.cache
 C:\Users\tlim\source\repos\Sentiment\Sentiment\bin\Debug\Salience6.NET.dll
-C:\Users\tlim\source\repos\Sentiment\Sentiment\bin\Debug\Salience6.NET.pdb
+C:\Users\tlim\source\repos\Sentiment\Sentiment\obj\Debug\GeneratedInternalTypeHelper.g.cs

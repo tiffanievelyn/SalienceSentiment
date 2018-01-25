@@ -8,40 +8,14 @@ namespace ViewModel
     {
         private string _licensePath = "C:/Program Files (x86)/Lexalytics/License.v5";
         private string _dataPath = "C:/Program Files (x86)/Lexalytics/data";
-        private string _inputText = "This is all about getting on with it, delivering the things that we said we would do, I'm very pleased to say that we are ahead of time and this project includes not just level crossing removals, but power upgrades, signal upgrades, new stations well over and above the original commitment we made";
+
+        private string _inputText = "This is all about getting on with it, delivering the things that we said we would do, I'm very pleased to say ";
+
+        #region Attribute
         private float _score;
         private string _phrases;
-
-        Salience Engine = null;
-        
-        public MainViewModel()
-        {
-            try
-            {
-                //We declared Engine before initializing it so we could put this in a try/catch block, and 
-                //have the rest of the code outside.
-                Engine = new Salience(_licensePath, _dataPath);
-            }
-            catch (SalienceException e)
-            {
-                /*If the SalienceEngine constructor throws an error, one of these is likely to be true:
-                 * 1) The license file is missing/invalid/out of date
-                 * 2) The data directory was missing or contained incorrect files
-                 * 3) Salience6.dll could not be found. */
-                System.Console.WriteLine("Error Loading SalienceEngine: " + e.Message);
-                return;
-            }
-
-            int nRet = Engine.PrepareText(_inputText);
-            if (nRet == 0)
-            {
-                SalienceSentiment mySentiment = Engine.GetDocumentSentiment(true, String.Empty);
-                Score = mySentiment.fScore;
-                Phrase = mySentiment.ToString();
-                
-            }
-
-        }
+        private string _modelSentiment;
+        private string _emotions;
 
         public string Phrase
         {
@@ -93,15 +67,64 @@ namespace ViewModel
             }
         }
 
+        #endregion
+
+        #region ICommmand
+
+        public ICommand UpdateCommand
+        {
+            get { return new DelegateCommand(Update); }
+        }
+
         public ICommand ResetCommand
         {
             get { return new DelegateCommand(Reset); }
         }
 
+        #endregion
+        
+        Salience Engine = null;
+        
+        public MainViewModel()
+        {
+            try
+            {
+                //We declared Engine before initializing it so we could put this in a try/catch block, and 
+                //have the rest of the code outside.
+                Engine = new Salience(_licensePath, _dataPath);
+            }
+            catch (SalienceException e)
+            {
+                /*If the SalienceEngine constructor throws an error, one of these is likely to be true:
+                 * 1) The license file is missing/invalid/out of date
+                 * 2) The data directory was missing or contained incorrect files
+                 * 3) Salience6.dll could not be found. */
+                System.Console.WriteLine("Error Loading SalienceEngine: " + e.Message);
+                return;
+            }
+
+            
+        }
+        
         private void Reset()
         {
-            if (string.IsNullOrWhiteSpace(LicensePath)) return;
             LicensePath = DataPath = TextInput = string.Empty;
+        }
+
+        private void Update()
+        {
+            if (!string.IsNullOrEmpty(TextInput))
+            {
+                int nRet = Engine.PrepareText(_inputText);
+                Console.WriteLine(nRet);
+                if (nRet == 0)
+                {
+                    SalienceSentiment mySentiment = Engine.GetDocumentSentiment(true, String.Empty);
+                    Score = mySentiment.fScore;
+                    Phrase = mySentiment.Phrases.ToString();
+
+                }
+            }
         }
 
     }

@@ -12,6 +12,7 @@
     <system:String x:Key="_emotions">Emotions</system:String>
     <system:String x:Key="_update">Update</system:String>
     <system:String x:Key="_reset">Reset</system:String>
+    <system:String x:Key="_documentSentiment">Document Sentiment :</system:String>
 
 
 </ResourceDictionary>

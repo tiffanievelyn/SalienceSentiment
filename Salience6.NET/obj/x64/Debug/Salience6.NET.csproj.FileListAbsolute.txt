@@ -17,3 +17,4 @@ C:\Users\tlim\source\repos\Sentiment\Salience6.NET\bin\x64\Debug\normnfkd.nlp
 C:\Users\tlim\source\repos\Sentiment\Salience6.NET\obj\x64\Debug\Salience6.NET.csproj.CoreCompileInputs.cache
 C:\Users\tlim\source\repos\Sentiment\Salience6.NET\obj\x64\Debug\Salience6.NET.dll
 C:\Users\tlim\source\repos\Sentiment\Salience6.NET\obj\x64\Debug\Salience6.NET.pdb
+C:\Users\tlim\source\repos\Sentiment\Salience6.NET\obj\x64\Debug\Salience6.NET.csprojResolveAssemblyReference.cache

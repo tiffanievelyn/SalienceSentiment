@@ -107,7 +107,7 @@ namespace Lexalytics
     public class SalienceSentiment
     {
         public float fScore;
-        public List<SalienceSentimentPhrase> Phrases = new List<SalienceSentimentPhrase>();
+        public List<SentimentPhrase> Phrases = new List<SentimentPhrase>();
         public List<SalienceModelSentiment> ModelSentiment = new List<SalienceModelSentiment>();
         /// <summary>
         /// DEPRECATED: Added in Salience 5.1 to convey experimental emotion information about sentiment detected.
@@ -115,7 +115,7 @@ namespace Lexalytics
         public List<SalienceTopic> Emotions = new List<SalienceTopic>();
     }
 
-    public class SalienceSentimentPhrase
+    public class SentimentPhrase
     {
         public SaliencePhrase Phrase;
         public string sSource;
@@ -156,7 +156,7 @@ namespace Lexalytics
         public int nFirstPos;
         public List<SalienceMention> Mentions;
         public List<SalienceTheme> Themes;
-        public List<SalienceSentimentPhrase> SentimentPhrases= new List<SalienceSentimentPhrase>();
+        public List<SentimentPhrase> SentimentPhrases= new List<SentimentPhrase>();
         /// <summary>
         /// Introduced in Salience 5.1, a list of topics that the entity co-occurred with.
         /// </summary>

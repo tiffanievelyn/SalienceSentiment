@@ -1830,11 +1830,11 @@ namespace Lexalytics
 
             SalienceSentiment oRet = new SalienceSentiment();
             oRet.fScore = oResult.fScore;
-            oRet.Phrases = new List<SalienceSentimentPhrase>(oResult.oPhrases.nLength);
+            oRet.Phrases = new List<SentimentPhrase>(oResult.oPhrases.nLength);
             umSalienceSentimentPhrase* pPhrase = oResult.oPhrases.pPhrases;
             for (int i = 0; i < oResult.oPhrases.nLength; i++, pPhrase++)
             {
-                SalienceSentimentPhrase Phrase = new SalienceSentimentPhrase();
+                SentimentPhrase Phrase = new SentimentPhrase();
                 Phrase.fScore = pPhrase->fScore;
                 Phrase.Phrase = processPhrase(pPhrase->oPhrase);
                 Phrase.nType = pPhrase->nType;
@@ -2273,13 +2273,13 @@ namespace Lexalytics
     #endregion // Entity methods
 
     #region Shared Entity and Document methods
-        private unsafe List<SalienceSentimentPhrase> processSentimentPhrases(umSalienceSentimentPhraseList oPhraseList)
+        private unsafe List<SentimentPhrase> processSentimentPhrases(umSalienceSentimentPhraseList oPhraseList)
         {
-            List<SalienceSentimentPhrase> oRet = new List<SalienceSentimentPhrase>(oPhraseList.nLength);
+            List<SentimentPhrase> oRet = new List<SentimentPhrase>(oPhraseList.nLength);
             umSalienceSentimentPhrase* pPhrase = oPhraseList.pPhrases;
             for (int i = 0; i < oPhraseList.nLength; i++, pPhrase++)
             {
-                SalienceSentimentPhrase Phrase = new SalienceSentimentPhrase();
+                SentimentPhrase Phrase = new SentimentPhrase();
                 Phrase.fScore = pPhrase->fScore;
                 Phrase.Phrase = processPhrase(pPhrase->oPhrase);
                 Phrase.nType = pPhrase->nType;

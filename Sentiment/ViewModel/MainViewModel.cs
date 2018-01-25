@@ -1,5 +1,7 @@
 ﻿using Lexalytics;
+using Sentiment.ViewModel;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace ViewModel
@@ -9,21 +11,42 @@ namespace ViewModel
         private string _licensePath = "C:/Program Files (x86)/Lexalytics/License.v5";
         private string _dataPath = "C:/Program Files (x86)/Lexalytics/data";
 
-        private string _inputText = "This is all about getting on with it, delivering the things that we said we would do, I'm very pleased to say ";
+        private string _inputText = "This is happy all about getting on with it, delivering the things that we said we would do, I'm very pleased to say ";
 
         #region Attribute
+        private ObservableCollection<S_Phrase> _phraseList = new ObservableCollection<S_Phrase>();
+
+        private float _documentSentiment;
         private float _score;
-        private string _phrases;
+        private string _phrasesView;
         private string _modelSentiment;
         private string _emotions;
 
-        public string Phrase
+        public float DocumentSentiment
         {
-            get { return _phrases; }
+            get { return _documentSentiment; }
             set
             {
-                _phrases = value;
-                RaisePropertyChangedEvent(nameof(Phrase));
+                _documentSentiment = value;
+                RaisePropertyChangedEvent(nameof(DocumentSentiment));
+            }
+        }
+
+        public ObservableCollection<Sentiment.ViewModel.S_Phrase> PhraseList
+        {
+            get
+            {
+                return _phraseList;
+            }
+        }
+
+        public string PhraseView
+        {
+            get { return _phrasesView; }
+            set
+            {
+                _phrasesView = value;
+                RaisePropertyChangedEvent(nameof(PhraseView));
             }
         }
 
@@ -84,7 +107,9 @@ namespace ViewModel
         #endregion
         
         Salience Engine = null;
-        
+        private float score; //LOOK
+        private string phrase;
+
         public MainViewModel()
         {
             try
@@ -102,8 +127,6 @@ namespace ViewModel
                 System.Console.WriteLine("Error Loading SalienceEngine: " + e.Message);
                 return;
             }
-
-            
         }
         
         private void Reset()
@@ -115,14 +138,19 @@ namespace ViewModel
         {
             if (!string.IsNullOrEmpty(TextInput))
             {
-                int nRet = Engine.PrepareText(_inputText);
+                int nRet = Engine.PrepareText(_inputText); //returns 0 if less than 1000 words
                 Console.WriteLine(nRet);
                 if (nRet == 0)
                 {
                     SalienceSentiment mySentiment = Engine.GetDocumentSentiment(true, String.Empty);
-                    Score = mySentiment.fScore;
-                    Phrase = mySentiment.Phrases.ToString();
-
+                    DocumentSentiment = mySentiment.fScore;
+                    foreach (var a in mySentiment.Phrases.ToArray())
+                    {
+                        S_Phrase p = new S_Phrase { sp_score = a.fScore, sp_phrase = a.Phrase.sText };
+                        PhraseList.Add(p);
+                        RaisePropertyChangedEvent(nameof(PhraseList));
+                    }
+                    
                 }
             }
         }

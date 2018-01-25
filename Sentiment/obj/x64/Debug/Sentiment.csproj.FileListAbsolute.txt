@@ -17,3 +17,4 @@ C:\Users\tlim\source\repos\Sentiment\Sentiment\obj\x64\Debug\Sentiment.exe
 C:\Users\tlim\source\repos\Sentiment\Sentiment\obj\x64\Debug\Sentiment.pdb
 C:\Users\tlim\source\repos\Sentiment\Sentiment\bin\x64\Debug\Salience6.NET.pdb
 C:\Users\tlim\source\repos\Sentiment\Sentiment\obj\x64\Debug\Sentiment.csprojResolveAssemblyReference.cache
+C:\Users\tlim\source\repos\Sentiment\Sentiment\obj\x64\Debug\Resource\StyleResource.baml

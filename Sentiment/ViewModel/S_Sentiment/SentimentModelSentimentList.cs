@@ -17,6 +17,8 @@ namespace Sentiment.ViewModel
     public class S_ModelSentiment
     {
         //MODEL SENTIMENT
+        //ms_best should either be 0=positive, 1=negative, 2=mixed, 3=neutral
+        //should also match category of greatest model score
         public string ms_name { get; set; }
         public int ms_best { get; set; }
         public float ms_positive { get; set; }

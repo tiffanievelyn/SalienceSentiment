@@ -1,7 +1,9 @@
 ﻿using Lexalytics;
 using Sentiment.ViewModel;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Controls.DataVisualization.Charting;
 using System.Windows.Input;
 
 namespace ViewModel
@@ -18,6 +20,28 @@ namespace ViewModel
         private ObservableCollection<S_Phrase> _phraseList = new ObservableCollection<S_Phrase>();
         private ObservableCollection<S_ModelSentiment> _modelSentimentList = new ObservableCollection<S_ModelSentiment>();
         private ObservableCollection<S_Emotion> _emotiontList = new ObservableCollection<S_Emotion>();
+
+        private int _docScore = 0;
+        private List<KeyValuePair<string, int>> _pieChartItems = new List<KeyValuePair<string, int>>();
+
+        public int DocScore
+        {
+            get { return _docScore; }
+            set
+            {
+                _docScore = value;
+                RaisePropertyChangedEvent(nameof(DocScore));
+            }
+        }
+        public List<KeyValuePair<string, int>> PieChartItems
+        {
+            get { return _pieChartItems; }
+            set
+            {
+                _pieChartItems = value;
+                RaisePropertyChangedEvent(nameof(PieChartItems));
+            }
+        }
 
         public float DocumentSentiment
         {
@@ -92,7 +116,7 @@ namespace ViewModel
         }
 
         #endregion
-        
+
         Salience Engine = null;
 
         public MainViewModel()
@@ -112,6 +136,11 @@ namespace ViewModel
                 System.Console.WriteLine("Error Loading SalienceEngine: " + e.Message);
                 return;
             }
+
+            PieChartItems.Add(new KeyValuePair<string, int>("Positive", 25));
+            PieChartItems.Add(new KeyValuePair<string, int>("Negative", 25));
+            PieChartItems.Add(new KeyValuePair<string, int>("Mixed", 25));
+            PieChartItems.Add(new KeyValuePair<string, int>("Neutral", 25));
         }
         private void resetList()
         {
@@ -131,11 +160,14 @@ namespace ViewModel
             {
                 int nRet = Engine.PrepareText(_inputText); //returns 0 if less than 1000 words
                 Console.WriteLine(nRet);
-                if (nRet == 0)
+                
+                if (nRet == 0 || nRet == 6) //not sure what 0 or 6 means but that's what Salience set the returns for non-error as
                 {
                     SalienceSentiment mySentiment = Engine.GetDocumentSentiment(true, String.Empty);
                     resetList();
-                    DocumentSentiment = mySentiment.fScore;
+                    DocumentSentiment = mySentiment.fScore * 100;
+                    DocScore = (int)DocumentSentiment;
+
                     foreach (var a in mySentiment.Phrases.ToArray())
                     {
                         S_Phrase p = new S_Phrase {
@@ -157,6 +189,15 @@ namespace ViewModel
                         };
                         ModelSentimentList.Add(m);
                     }
+
+                    List<KeyValuePair<string, int>> MyValue = new List<KeyValuePair<string, int>>();
+                    MyValue.Add(new KeyValuePair<string, int>("Positive", (int) (ModelSentimentList[0].ms_positive *100)));
+                    MyValue.Add(new KeyValuePair<string, int>("Negative", (int) (ModelSentimentList[0].ms_negative *100)));
+                    MyValue.Add(new KeyValuePair<string, int>("Mixed", (int) (ModelSentimentList[0].ms_mixed *100)));
+                    MyValue.Add(new KeyValuePair<string, int>("Neutral", (int) (ModelSentimentList[0].ms_neutral *100)));
+
+                    PieChartItems = MyValue;
+                    /*
                     foreach (var c in mySentiment.Emotions.ToArray())
                     {
                         S_Emotion e = new S_Emotion
@@ -168,7 +209,7 @@ namespace ViewModel
                         };
                         EmotionList.Add(e);
                     }
-                    
+                    */
                 }
             }
         }

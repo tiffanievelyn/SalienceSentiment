@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sentiment"
         xmlns:c="clr-namespace:Sentiment.ViewModel"
+        xmlns:tool="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="700">
+        Title="MainWindow" Height="700" Width="700">
 
     <Window.Background>
-        <StaticResource ResourceKey="DarkBackground"/>
+        <StaticResource ResourceKey="LightGreen"/>
     </Window.Background>
 
     <Grid Margin="10">
@@ -18,6 +20,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="80" />
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
         <StackPanel Orientation="Vertical" Grid.Row="0">
@@ -45,34 +48,127 @@
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.Row="2">
+            <Label Content="{Binding DocumentSentiment}"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.5*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <!--<ColumnDefinition Width="2*"/>-->
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Grid.Row="0" Content="{StaticResource _score}"/>
-                <Label Grid.Column="1" Grid.Row="0" Content="{StaticResource _phrases}"/>
-                <Label Grid.Column="2" Grid.Row="0" Content="{StaticResource _modelSentiment}"/>
-                <Label Grid.Column="3" Grid.Row="0" Content="{StaticResource _emotions}"/>
+                <Label Grid.Column="0" Grid.Row="0" Content="{StaticResource _phrases}"/>
+                <Label Grid.Column="1" Grid.Row="0" Content="{StaticResource _modelSentiment}"/>
+                <!--<Label Grid.Column="3" Grid.Row="0" Content="{StaticResource _emotions}"/>-->
 
-                <Border MinHeight="100" Grid.Column="0" Grid.Row="1" Style="{StaticResource borderStyle}">
-                    <Label Content="{Binding DocumentSentiment}"/>
+                <Border MinHeight="100" Grid.Column="0" Grid.Row="1" Style="{StaticResource borderStyle}" Background="White">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                    
+
+                        <telerik:RadVerticalLinearGauge telerik:StyleManager.Theme="Windows8" Grid.Column="0">
+                            <telerik:VerticalLinearScale Min="-100" Max="100"
+                            MajorTicks="10"
+                            RangeLocation="OverOutside">
+                                <telerik:VerticalLinearScale.Ranges>
+                                    <telerik:GaugeRange Background="#FFA3A3A3"
+                        IndicatorBackground="#FFA3A3A3"
+                        StrokeThickness="2"
+                        StartWidth="0.02"
+                        EndWidth="0.02"
+                        Min="-100" Max="-20"/>
+                                    <telerik:GaugeRange Background="#FF000000"
+                        IndicatorBackground="#FF000000"
+                        StrokeThickness="2"
+                        StartWidth="0.02"
+                        EndWidth="0.02"
+                        Min="-20" Max="20"  />
+                                    <telerik:GaugeRange Background="#FFE50000"
+                        IndicatorBackground="#FFE50000"
+                        StrokeThickness="2"
+                        StartWidth="0.02"
+                        EndWidth="0.02"
+                        Min="20" Max="100" />
+                                </telerik:VerticalLinearScale.Ranges>
+                                <telerik:VerticalLinearScale.Indicators>
+                                    <telerik:Marker x:Name="marker" Value="{Binding DocScore}" 
+                    UseRangeColor="True"
+                    telerik:ScaleObject.RelativeWidth="0.1*"
+                    telerik:ScaleObject.RelativeHeight="0.04*"
+                    telerik:ScaleObject.Offset="0.02*"/>
+                                </telerik:VerticalLinearScale.Indicators>
+                                
+                            </telerik:VerticalLinearScale>
+                        </telerik:RadVerticalLinearGauge>
+                        
+                        <!--
+                    <telerik:RadRadialGauge x:Name="radialGauge"
+                        Width="Auto"
+                        Height="Auto"
+                        telerik:StyleManager.Theme="Windows8">
+                        <telerik:RadialScale Min="-10"
+                         Max="10">
+                            <telerik:RadialScale.Indicators>
+                                <telerik:Needle Name="needle" Value="{Binding DocScore}"/>
+                                <telerik:Pinpoint/>
+                            </telerik:RadialScale.Indicators>
+                        </telerik:RadialScale>
+                    </telerik:RadRadialGauge>
+                    -->
+
+                        <!--<DataGrid MinHeight="100" Grid.Row="2" ItemsSource="{Binding PhraseList}"/>-->
+                        
+                        <ListView ItemsSource="{Binding PhraseList}" Grid.Column="1">
+                            <ListView.View>
+                                <GridView >
+                                    <GridViewColumn Width="70" Header="Score" DisplayMemberBinding="{Binding sp_score}"/>
+                                    <GridViewColumn Width="150" Header="Phrase" DisplayMemberBinding="{Binding sp_phrase}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        
+
+                    </Grid>
                 </Border>
+
                 <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource borderStyle}">
-                    <DataGrid MinHeight="100" Grid.Row="2" ItemsSource="{Binding PhraseList}"/>
+                    <!--
+                    <ListView ItemsSource="{Binding ModelSentimentList}">
+                        <ListView.View>
+                            <GridView >
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding ms_name}" />
+                                <GridViewColumn Header="Best" DisplayMemberBinding="{Binding ms_best}"/>
+                                <GridViewColumn Header="Positive" DisplayMemberBinding="{Binding ms_positive}"/>
+                                <GridViewColumn Header="Negative" DisplayMemberBinding="{Binding ms_negative}"/>
+                                <GridViewColumn Header="Mixed" DisplayMemberBinding="{Binding ms_mixed}"/>
+                                <GridViewColumn Header="Neutral" DisplayMemberBinding="{Binding ms_neutral}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    -->
+                    <tool:Chart Grid.Row="4"  Name="PieChart1" Width="Auto" VerticalAlignment="Top" Height="250" HorizontalAlignment="Stretch" Background="White">
+                        <tool:Chart.PlotAreaStyle>
+                            <!-- background of the pie-->
+                            <Style TargetType="Grid">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Style>
+                        </tool:Chart.PlotAreaStyle>
+                        
+                        <tool:PieSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding PieChartItems}" IsSelectionEnabled="True" />
+                        
+                    </tool:Chart>
                 </Border>
-                <Border Grid.Column="2" Grid.Row="1" Style="{StaticResource borderStyle}">
-                    <DataGrid MinHeight="100" Grid.Row="2" ItemsSource="{Binding ModelSentimentList}"/>
-                </Border>
+                <!--
                 <Border Grid.Column="3" Grid.Row="1" Style="{StaticResource borderStyle}">
                     <DataGrid MinHeight="100" Grid.Row="2" ItemsSource="{Binding EmotionList}"/>
                 </Border>
+                -->
             </Grid>
         </StackPanel>
 
@@ -80,8 +176,6 @@
             <Button Style="{StaticResource buttonStyle}" Command="{Binding UpdateCommand}" Content="{StaticResource _update}" />
             <Button Style="{StaticResource buttonStyle}" Command="{Binding ResetCommand}" Content="{StaticResource _reset}" />
         </StackPanel>
-
-        
 
     </Grid>
 </Window>

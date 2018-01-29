@@ -4,12 +4,13 @@
     
     <SolidColorBrush x:Key="DarkBackground" Color="#2A363B"/>
     <SolidColorBrush x:Key="LightYellow" Color="#FECEA8"/>
+    <SolidColorBrush x:Key="LightGreen" Color="#99B898"/>
     <SolidColorBrush x:Key="RosyBrown" Color="RosyBrown"/>
 
     <Style TargetType="{x:Type Button}" x:Key="buttonStyle">
         <Setter Property="Margin" Value="3"/>
         <Setter Property="Padding" Value="10"/>
-        <Setter Property="Background" Value="{DynamicResource LightYellow}"/>
+        <Setter Property="Background" Value="White"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource RosyBrown}"/>
@@ -23,7 +24,7 @@
     </Style>
 
     <Style TargetType="{x:Type Label}">
-        <Setter Property="Foreground" Value="#99B898"/>
+        <Setter Property="Foreground" Value="{DynamicResource DarkBackground}"/>
     </Style>
 
 </ResourceDictionary>
